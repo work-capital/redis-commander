@@ -1,6 +1,6 @@
 'use strict';
 
-var redis = require('./redis'),
+var redis = require('./node_modules/redis'),
 //client = redis.createClient();
 client = redis.createClient(6379, '127.0.0.1', {'detect_buffers': true});
 var bert = require('./bert');
@@ -37,7 +37,7 @@ client.hmget(new Buffer('snapshots'), 'jay', function(err, res) {
   console.log(obj2);
   r = res;
 
-  console.log(bert2.decode(json));
+  //console.log(bert2.decode(json));
   // r[0][0] = 131  yeah!    r[0].toJSON()['data']
   //var s = bert.bytes_to_string(result);
   //var data = result.toString('binary');
