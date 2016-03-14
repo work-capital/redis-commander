@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+//work-capital modification
+var port = 6379;
+var host = "127.0.0.1";
+
 var optimist = require('optimist');
 var redis = require('redis');
 var app = require('../lib/app');
@@ -99,7 +103,7 @@ myUtils.getConfig(function (err, config) {
       };
 
       if (!myUtils.containsConnection(config.default_connections, newDefault)) {
-        var client = redis.createClient(newDefault.port, newDefault.host);
+        var client = redis.createClient(newDefault.port, newDefault.host, {'detect_buffers': true});
         client.label = newDefault.label;
         redisConnections.push(client);
         if (args['redis-password']) {
@@ -124,13 +128,14 @@ myUtils.getConfig(function (err, config) {
       if (db == null || isNaN(db)) {
         db = 0
       }
-      redisConnections.push(redis.createClient());
+      redisConnections.push(redis.createClient(port, host,{'detect_buffers': true}));
       setUpConnection(redisConnections.getLast(), db);
     }
   });
   return startWebApp();
 });
 
+//work-capital code: detect_buffers:true
 function startDefaultConnections (connections, callback) {
   if (connections) {
     connections.forEach(function (connection) {
