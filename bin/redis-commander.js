@@ -134,7 +134,7 @@ myUtils.getConfig(function (err, config) {
 function startDefaultConnections (connections, callback) {
   if (connections) {
     connections.forEach(function (connection) {
-      var client = redis.createClient(connection.port, connection.host);
+      var client = redis.createClient(connection.port, connection.host,{'detect_buffers': true});
       client.label = connection.label;
       redisConnections.push(client);
       if (connection.password) {
