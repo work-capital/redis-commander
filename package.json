@@ -27,6 +27,7 @@
     "express": "2.x.x",
     "inflection": "~1.2.0",
     "node-redis-dump": "~0.2.0",
+    "node_erlastic": "0.0.8",
     "optimist": "~0.3.4",
     "readline-browserify": "0.0.4",
     "redis": "~0.7.2",
